@@ -13,15 +13,23 @@ include('mysql.php');
 ?>
 
 <?php
-if(isset($_POST["torles"])){
-    $kit=$_POST["kit"];
-    echo($kit);
+if(isset($_POST['torles'])){
+    $dwho=$_POST['kit'];
 
+    $sql = "DELETE FROM buko WHERE `buko`.`ID` = '$dwho'";
+
+    $stmt = $conn->prepare($sql);
+//$stmt->bind_param("s", $valueToInsert); // "s" represents a string type
+if ($stmt->execute()) {
+//    echo "Törlés sikeres";
+} else {
+    echo "Error: " . $stmt->error;
+}
 }
 
-
-
 ?>
+
+
 
 
 <body>
