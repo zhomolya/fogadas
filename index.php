@@ -56,6 +56,28 @@ if ($stmt->execute()) {
             echo "Error: " . $stmt->error;
         }
     }
+
+
+    if(isset($_POST['modosit']))
+    {
+        $kit=$_POST['kit'];
+        $csapat=$_POST['csapat'];
+        $idopont=$_POST['idopont'];
+        $penz=$_POST['penz'];
+        $szorzo=$_POST['szorzo'];
+        
+        if($szorzo>0){
+        $ujtet=ceil($penz/$szorzo*100);
+
+        echo($ujtet);}
+
+
+
+
+       
+    }
+    
+    
 ?>
     
    <form method="post">
@@ -73,7 +95,7 @@ if ($stmt->execute()) {
     if ($result->num_rows > 0) {
         echo "<table>"; 
         while ($row = $result->fetch_array()) {
-            echo "<tr><form method=post><td>" . $row[0] . "</td><td><input type=text name=csapat value=" . $row[1] . "></td><td><input type=text name=idopont value=" . $row[2] . "></td><td><input type=text name=penz value=" . $row[3] . "><input type=submit value=modosit name=modosit></td></form><td><form method=post><input type=hidden name=kit value=" . $row[0] . "><input type=submit name=torles value=torles></form></td></tr>";
+            echo "<tr><form method=post><td>" . $row[0] . "</td><td><input type=text name=csapat value=" . $row[1] . "></td><td><input type=text name=idopont value=" . $row[2] . "></td><td><input type=text name=penz value=" . $row[3] . "></td><td><input type=text name=szorzo value=" . $row[4] . "></td><td><input type=text name=tet value=" . $row[5] . "></td><td><input type=hidden name=kit value=" . $row[0] . "><input type=submit value=modosit name=modosit></td></form><td><form method=post><input type=hidden name=kit value=" . $row[0] . "><input type=submit name=torles value=torles></form></td></tr>";
         }
     
         echo "</table>";
