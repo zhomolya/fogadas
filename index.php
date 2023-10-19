@@ -40,13 +40,14 @@ if ($stmt->execute()) {
         $csapat = $_POST["textbox_value1"];
         $datum = $_POST["textbox_value2"];
         $buko = $_POST["textbox_value3"];
+        $keret = $_POST["textbox_value4"];
         //echo($datum."<br>");
         $sqlDatetime = date("Y-m-d H:i:s", strtotime($datum));
         //$datum = date("Y-m-d H:i:s", strtotime(str_replace('.', ' ', $datum)));
 
 
-        $sql = "INSERT INTO `buko` (`id`, `csapat`, `Datum`, `buko`) 
-        VALUES (NULL, '$csapat', '$sqlDatetime', '$buko');";
+        $sql = "INSERT INTO `buko` (`id`, `csapat`, `Datum`, `buko`,`keret`) 
+        VALUES (NULL, '$csapat', '$sqlDatetime', '$buko','$keret');";
 
        $stmt = $conn->prepare($sql);
         //$stmt->bind_param("s", $valueToInsert); // "s" represents a string type
@@ -96,6 +97,7 @@ if ($stmt->execute()) {
    Csapat:<input type="text" name="textbox_value1" placeholder="Enter a value" /></br>
    Dátum:<input type="text" name="textbox_value2" placeholder="Enter a value" /></br>   
    Bukó:<input type="text" name="textbox_value3" placeholder="Enter a value" /></br>
+   Keret:<input type="text" name="textbox_value4" value="1,5-ös" /></br>
    <input type="submit" value="Felvétel" name="felvetel"/>
 
 </form>
@@ -107,7 +109,7 @@ if ($stmt->execute()) {
     if ($result->num_rows > 0) {
         echo "<table>"; 
         while ($row = $result->fetch_array()) {
-            echo "<tr><form method=post><td>" . $row[0] . "</td><td><input type=text name=csapat value='" . $row[1] . "'></td><td><input type=text name=idopont value='" . $row[2] . "'></td><td><input type=text name=penz value=" . $row[3] . "></td><td><input type=text name=szorzo value=" . $row[4] . "></td><td><input type=text name=tet value=" . $row[5] . "></td><td><input type=hidden name=kit value=" . $row[0] . "><input type=submit value=modosit name=modosit></td></form><td><form method=post><input type=hidden name=kit value=" . $row[0] . "><input type=submit name=torles value=torles></form></td></tr>";
+            echo "<tr><form method=post><td>" . $row[0] . "</td><td><input type=text name=csapat value='" . $row[1] . "'></td><td><input type=text name=idopont value='" . $row[2] . "'></td><td><input type=text name=penz value=" . $row[3] . "></td><td><input type=text name=szorzo value=" . $row[4] . "></td><td><input type=text name=tet value=" . $row[5] . "></td><td>".$row[6]."</td><td><input type=hidden name=kit value=" . $row[0] . "><input type=submit value=modosit name=modosit></td></form><td><form method=post><input type=hidden name=kit value=" . $row[0] . "><input type=submit name=torles value=torles></form></td></tr>";
         }
     
         echo "</table>";
